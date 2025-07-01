@@ -1,0 +1,9 @@
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/IMU.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/LIS3MDL.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/LSM6DSL.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/StarlinkAPI.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/StarlinkAlignment.ini
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/berryIMU.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/device_pb2.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/device_pb2_grpc.py
+https://raw.githubusercontent.com/sab0276/starlink-auto-alignment/refs/heads/main/starlink-auto-alignment.py
