@@ -32,7 +32,7 @@ SLOWDELAY = 0.005  #in seconds
 STEPX = 2 #MICROSTEP Multiplyer: 1=Fullstep, 2=1/2 step, 4=1/4 step... 32=1/32.  MAKE SURE THIS MATCHES YOUR DIP SWITCH SETTING ON YOUR STEPPER CONTROLLER BOARD.
 FSPEED = FASTDELAY*STEPX #FAST SPEED
 SSPEED = SLOWDELAY*STEPX #SLOW SPEED
-MAXROTATIONS = 24.4 #MAX ROTATIONS TABLE CAN TURN FROM ZERO LIMIT TO MAX LIMIT
+MAXROTATIONS = 24.4 #MAX ROTATIONS MOTOR CAN TURN FROM ZERO LIMIT TO MAX LIMIT OF THE TABLE
 MAXSTEPS = MAXROTATIONS*SPR*STEPX #TOTAL NUMBER OF STEPS FROM TABLE AT LIMIT SWITCH (0) TO ROTATE UNTIL OTHER LIMIT IS PHYSICALLY HIT
 R360 = 12.25 # MOTOR ROTATIONS IN ORDER TO COMPLETE A FULL 360
 RDEGREE = R360/360 #0.0340277 ROTATIONS PER DEGREE
@@ -478,14 +478,16 @@ Up = Switch to Starlink API Mode (or Auto Mode if API not returning info)
 Down = Switch to Manual Mode
 0  = Zero Motor
 c  = Center Motor
-i  = Initialize Motor (ie,Zero then Center)
-e  = Enable Motor to keep satalite in position.  Uses power and motor gets hot.
+i  = Initialize Motor (ie,Zero then Center then align to Target direction)
+e  = Enable Motor to keep satellite in position.  Uses power and motor gets hot.
 d  = Disable Motor. May freewheel, but uses less power and keeps motor cool. (better)
 w  = Try to reconnect to Starlink WiFi
 t  = Get Raspberry Pi Temperaturre in *C
-x  = Turns off Zeroing and Centering Motor and starts in Manual Mode on next Restart of Service
+x  = Turns off Zeroing and Centering Motor and starts in Manual Mode on NEXT Restart of Service
 p  = Powercycle (ie Reboot) Pi
-ESC = Stops StarlinkAutoAlignment Service (this script) and returns to command line
+ESC = Restarts StarlinkAutoAlignment Service
+DEL = Stops StarlinkAutoAlignment Service (this script) and returns to command line
+Note: You need to hold p, ESC, and DEL to send the command to make sure you don't accidently exit out of the service
 '''
 
 
@@ -624,7 +626,7 @@ def manualMode():
 
 
 #AUTOMATICALLY ADJUST SATALITE ALIGNMENT IF IT GETS TOO FAR OUT OF ALIGNENT (ie. WHEN DRIVING)
-#HIT M ON WIRELESS CONNECTED KEYBOARD TO GO INTO MANUAL MODE
+#HIT M OR RIGHT OR LEFT ARROWS ON WIRELESS CONNECTED KEYBOARD TO GO INTO MANUAL MODE
 #HIT S ON WIRELESS CONNECTED KEYBOARD TO GO INTO STARLINK API AUTO ALIGNMENT MODE
 #USES COMPASS AND PRESET TARGET HEADING TO KEEP STARLINK ALIGNED.  LESS ACCURATE METHOD.  COMPASS IS NOT SUPER RELIABLE AND TARGET CHANGES WITH LOCATION AND OVER TIME
 def autoMode():
@@ -674,6 +676,8 @@ def autoMode():
 			starlinkAPIMode()
 		wait(1)
 
+
+#HIT M OR RIGHT OR LEFT ARROWS ON WIRELESS CONNECTED KEYBOARD TO GO INTO MANUAL MODE
 #USES STARLINK SATALITE API TO GET DESIRED DEGREES NEEDED. MOST ACCURATE METHOD
 def starlinkAPIMode():
 	global SPEED, MODE, APIDESIRED, TARGET
